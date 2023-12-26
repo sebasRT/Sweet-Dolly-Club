@@ -3,9 +3,8 @@ import { Dialog } from '@headlessui/react';
 import { useState } from 'react';
 
 
-const AuthModal = () => {
+const AuthModal = ({key}:{key: string | undefined}) => {
 
-const key = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
 
     const [authorized, setAuthorized] = useState(false)
     const [attempts, setAttempts] = useState(0)
