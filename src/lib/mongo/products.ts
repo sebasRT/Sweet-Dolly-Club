@@ -8,10 +8,10 @@ let products: Collection<Product>;
 
 
 export async function  init () {
-    if(db)
+    if(db) return
     try {
         client = await clientPromise
-        db =  client.db()
+        db =  client.db("Sweet-Dolly")
         products =  db.collection('products')
     } catch (error) {
         throw new Error('Failed to stablish connection to database' )
