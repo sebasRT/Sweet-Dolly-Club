@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const AuthModal = () => {
 
-    const key: string | undefined = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+    const key: string | undefined = process.env.ADMIN_PASSWORD
 
     const [authorized, setAuthorized] = useState(false)
     const [attempts, setAttempts] = useState(0)
