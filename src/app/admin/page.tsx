@@ -7,11 +7,11 @@ export const revalidate = 0
 
 const AdminPage = async () => {
     const {products} = await getProducts()
-    const key = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
-
+  
     return (
       <div>
-        <AuthModal key={key}/>
+        <AuthModal
+        />
         <ProductGrid>
         {products?.map(product =><ProductCard key={product._id?.toString()} product={{...product, _id: product._id?.toString()}}/>)}
         </ProductGrid>
