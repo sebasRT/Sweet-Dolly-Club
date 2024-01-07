@@ -6,6 +6,7 @@ import { CiImageOn } from "react-icons/ci";
 import { RotatingLines } from 'react-loader-spinner';
 import { Product } from '../modals/utils/model';
 import { MdEditSquare } from "react-icons/md";
+import { uploadImage } from '../../actions';
 
 const ImageInput = () => {
 
@@ -31,6 +32,8 @@ const ImageInput = () => {
     const handlePostImage = async (files: FileList | null)=>{
 
         // deleteImage(imageID)
+
+        
         if(files){
 
             const file = files[0]
@@ -50,7 +53,7 @@ const ImageInput = () => {
             trigger("imageID")
             console.log(data)
         } catch (error: any) {
-            console.log(error.message);
+            throw new error(error.message)
         }
     }
     }
@@ -84,6 +87,7 @@ const ImageInput = () => {
             }
     </div>
 
+
     <div onClick={()=> fileInput.current?.click()}>
         
             <input name="image" type="file" id="file" onChange={(e)=>{handlePostImage(e.target.files)} } accept='image/*' hidden ref={fileInput}/>
@@ -92,6 +96,7 @@ const ImageInput = () => {
 
     <button className='relative top-0 left-0 text-2xl m-2'><MdEditSquare/></button>
     </div>
+
     {
             errors.imageID && 
             <span className="text-textWarning text-xs font-semibold">{errors.imageID?.message}</span>
