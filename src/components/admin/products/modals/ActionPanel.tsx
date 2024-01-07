@@ -12,7 +12,7 @@ type Props = {
 const ActionPanel = ({setDefault, setOpen, type}: Props) => {
 
  return (
-       <Dialog.Panel className="mx-auto max-w-sm rounded bg-productModalBG text-textLightPrimary z-10 flex flex-col justify-center p-10 text-center gap-4">
+       <Dialog.Panel className="mx-auto max-w-sm rounded bg-primary text-textLightPrimary z-10 flex flex-col justify-center p-10 text-center gap-4">
             {
                 (()=>{
                     switch (type) {

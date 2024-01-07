@@ -56,6 +56,28 @@ export async function  getProductById (id:string) {
 
 }
 
+
+export async function getProductsByCategory(categoryToFind: "Otra" |
+"Waffle"|
+"Frosty"|
+"Malteada"|
+"Malteada natural"|
+"Frappé"|
+"Bebida fría"|
+"Bebida caliente" ) {
+    try {
+        if (!products) await init()
+        const result: Product[] = await products.find({category: categoryToFind})
+        .map(product => ({...product}))
+        .toArray()
+        
+        return {success:true, products: result, error: null};
+
+    } catch (error) {
+        return {success: false , error: 'Failed to get products',products: null}
+    }
+}
+
 export async function createProduct(product: Product) {
     try {
       if (!products) await init();

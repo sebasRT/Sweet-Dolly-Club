@@ -8,6 +8,11 @@ import ArrayInput from '../inputs/ArrayInput';
 import Textarea from '../inputs/Textarea';
 import { useRouter } from 'next/navigation';
 import ActionPanel from './ActionPanel';
+import ImageInput from '../inputs/ImageInput';
+import deleteImage from './deleteImage';
+import { Product } from './utils/model';
+import SelectInput from '../inputs/SelectInput';
+import {DevTool} from '@hookform/devtools';
 
 type Props = {
   isOpen: boolean;
@@ -15,18 +20,14 @@ type Props = {
   product: Product;
 };
 
-type Product = {
-  name: string;
-  description: string;
-  ingredients: string[];
-  price: number;
-};
 
 const schema: yup.ObjectSchema<Product>= yup.object({
   name: yup.string().required("El nombre es obligatorio"),
   description: yup.string().required("Muestra a tus clientes una descripción"),
-  ingredients: yup.array().of(yup.string().required()).required("Procura no dejar el producto sin ingredientes"),
+  imageID: yup.string().required("Por favor añade una imagen"),
+  category: yup.string().oneOf(["Waffle", "Frosty", "Malteada", "Malteada natural", "Frappé", "Bebida fría", "Bebida caliente", "Otra"],"Selecciona alguna categoría").required(),
   price: yup.number().typeError("Por favor añade un precio al producto").required("Por favor añade un precio al producto"),
+  ingredients: yup.array().of(yup.string().required()).required("Procura no dejar el producto sin ingredientes").length(1, "Procura no dejar el producto sin ingredientes"),
 }) ;
 
 
@@ -40,7 +41,7 @@ const CreatePModal = ({ isOpen, setOpen, product }: Props) => {
     resolver: yupResolver(schema),
   });
   
-  const { register, formState, trigger, getValues, handleSubmit, reset } = form
+  const { register, formState, trigger, getValues, handleSubmit, reset, control } = form
 
   const { errors } = formState;
 
@@ -49,6 +50,8 @@ const CreatePModal = ({ isOpen, setOpen, product }: Props) => {
     const productToSubmit: Product = {
       name: getValues().name,
       description: getValues().description,
+      imageID: getValues().imageID,
+      category: getValues().category,
       price: getValues().price,
       ingredients: getValues().ingredients
     }
@@ -79,48 +82,59 @@ const CreatePModal = ({ isOpen, setOpen, product }: Props) => {
 
   return (
 
-      <Dialog open={isOpen} onClose={() => setOpen(false)} className="relative z-50">
+      <Dialog open={isOpen} onClose={() => setOpen(true)} className="relative z-50">
 
           <div className="fixed inset-0 bg-black/30 z-0" aria-hidden="true" />
-          <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
+          <div className="fixed inset-0 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            
         {
             
             (()=>{
                 switch (modalState) {
                     case "none":
-                       return <Dialog.Panel className="mx-auto max-w-sm rounded bg-productModalBG text-textLightPrimary z-10 flex flex-col justify-center p-10 text-center gap-4">
-                        <TextInput
-                          label="NOMBRE"
-                          {...register('name', { onChange: async () => await trigger('name') })}
-                          error={!!errors.name}
-                          helperText={errors.name?.message}
-                        />
-                        <TextInput
-                          label="PRECIO"
-                          type="number"
-                          {...register('price', { onChange: async () => await trigger('price') })}
-                          error={!!errors.price}
-                          helperText={errors.price?.message}
-                        />
-                        <Textarea
-                          label="DESCRIPCIÓN"
-                          {...register('description', { onChange: async () => await trigger('description') })}
-                          error={!!errors.description}
-                          helperText={errors.description?.message}
-                        />
-                        <FormProvider {...form}>
-                            <ArrayInput/>
-                            { errors.ingredients &&
-                              errors.ingredients.message &&
-                             <span className="text-textWarning text-xs font-semibold"> </span>}
-                        </FormProvider>
+                       
+                       return <Dialog.Panel className="mx-auto max-w-xl rounded bg-primary text-textLightPrimary z-10 grid grid-cols-1 md:grid-cols-2 p-10 gap-3">
+                        <div className='flex flex-col justify-center text-center gap-3'>
+                          <TextInput
+                            label="NOMBRE"
+                            {...register('name', { onChange: async () => await trigger('name') })}
+                            error={!!errors.name}
+                            helperText={errors.name?.message}
+                          />
+                          <TextInput
+                            label="PRECIO"
+                            type="number"
+                            {...register('price', { onChange: async () => await trigger('price') })}
+                            error={!!errors.price}
+                            helperText={errors.price?.message}
+                          />
+                          <Textarea
+                            label="DESCRIPCIÓN"
+                            {...register('description', { onChange: async () => await trigger('description') })}
+                            error={!!errors.description}
+                            helperText={errors.description?.message}
+                          />
+                          <FormProvider {...form}>
+                            <SelectInput/>
+                          </FormProvider>
+                        </div>
+
+                          <FormProvider {...form}>
+                        <div className='flex flex-col justify-center text-center gap-3'>
+                          <label className="m-1 font-bold">IMAGEN</label>
+                            <ImageInput/>
+                              <ArrayInput/>
+                             
+                        </div>
+                          </FormProvider>
               
-                        <button type="submit" onClick={handleSubmit(onSubmit)} className="font-semibold bg-black/30">
-                          Guardar
-                        </button>
-                        <button onClick={() => {setOpen(false); reset()}} className="font-semibold">
+                        <button onClick={() => {deleteImage(getValues().imageID);setOpen(false); reset();}} className="font-semibold mt-4 bg-black/10">
                           Descartar
                         </button> 
+                        <button type="submit" onClick={handleSubmit(onSubmit)} className="font-semibold bg-black/30 mt-4">
+                          Guardar
+                        </button>
                       </Dialog.Panel>
               
                     case "created":
@@ -139,7 +153,9 @@ const CreatePModal = ({ isOpen, setOpen, product }: Props) => {
             }
 
             )() 
-            }
+          }
+          </div>
+          <DevTool control={control}/>
       </div>
     </Dialog>
   );
@@ -159,6 +175,7 @@ const createProduct = async(product: Product)=>{
   
       return result
   }
+
 
 
 

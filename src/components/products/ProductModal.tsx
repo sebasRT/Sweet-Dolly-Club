@@ -1,5 +1,6 @@
 import { Product } from '@/model/Product'
 import { Dialog } from '@headlessui/react'
+import { CldImage } from 'next-cloudinary'
 import React, { Dispatch, SetStateAction } from 'react'
 
 type Props = {
@@ -9,6 +10,10 @@ type Props = {
 }
 
 const ProductModal = ({isOpen, setOpen, product}: Props) => {
+  const {name, description, imageID, price, category, ingredients} = product
+  let productIngredients = ingredients.join(", ")
+  const productCategory = category.replace("Otra", "")
+
   return (
    <Dialog open={isOpen} onClose={()=> setOpen(false)} className="relative z-50 ">
     <div className="fixed inset-0 bg-black/30 z-0 " aria-hidden="true" />
@@ -17,7 +22,7 @@ const ProductModal = ({isOpen, setOpen, product}: Props) => {
       <Dialog.Panel className="mx-auto
       max-w-sm 
       rounded 
-      bg-productModalBG 
+      bg-primary
       text-textLightPrimary
       z-10 
       flex  
@@ -28,12 +33,17 @@ const ProductModal = ({isOpen, setOpen, product}: Props) => {
       gap-4
       ">
 
-        <Dialog.Title className="font-bold ">{product.name}</Dialog.Title>
+        <Dialog.Title className="font-bold text-xl uppercase ">{name} <span>{productCategory}</span> </Dialog.Title>
         <Dialog.Description>
-          {product.description}
+          {description}
         </Dialog.Description>
-          <b>$ {product.price}</b>
-        
+        <CldImage src={imageID} width={500} height={500} alt="product's image" className='h-25 w-full' />
+
+        <div>
+            <b>INGREDIENTES</b>
+            <p>{productIngredients}</p>
+        </div>
+          <b className='text-lg'>$ {price}</b>
           <button onClick={() => setOpen(false)} className='font-semibold bg-black/30'>OK</button>
       </Dialog.Panel>
     </div>

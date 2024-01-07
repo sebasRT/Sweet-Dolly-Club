@@ -10,7 +10,10 @@
 
 body{
     min-height: 100vh;
-    background-color: #0c192c;
+    background-color: #062149;
+    background-image: url("/public/background.jpeg");
+    background-position: center;
+    color: #e6e6ff ;
 }
 input:focus-visible{
     outline: none;

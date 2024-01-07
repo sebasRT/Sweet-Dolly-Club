@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/header/Header'
+import background from "@public/background.jpeg"
+import CategoriesNavbar from '@/components/layout/header/CategoriesNavbar'
+import { useRouter } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,12 +18,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+ 
   return (
     <html lang="es">
-      <body className={inter.className + " "+ "bg-gradient-to-br from-primary to-secondary"}>
-      <Header/>
+      <body className={inter.className}  style={{
+        // use the src property of the image object
+        backgroundImage: `url(${background.src})`,
+        // other styles
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
         {children}
-     
       </body>
     </html>
   ) 

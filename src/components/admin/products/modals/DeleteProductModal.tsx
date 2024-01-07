@@ -5,6 +5,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import ActionPanel from './ActionPanel';
 import { RiErrorWarningFill } from "react-icons/ri";
 import { useRouter } from 'next/navigation';
+import deleteImage from './deleteImage';
 
 type Props = {
     isOpen: boolean;
@@ -23,6 +24,7 @@ const DeletePModal = ({isOpen, setOpen, product}: Props) => {
 
         setModalState("loading")
         const result = await deleteProduct(id)
+        deleteImage(product.imageID)
 
         if(result.error){
             setModalState("db error")
@@ -50,7 +52,7 @@ const DeletePModal = ({isOpen, setOpen, product}: Props) => {
   (()=>{
       switch (modalState) {
           case "none":
-             return  <Dialog.Panel className="mx-auto max-w-sm rounded bg-productModalBG text-textLightPrimary z-10 flex flex-col justify-center p-10 text-center gap-4">
+             return  <Dialog.Panel className="mx-auto max-w-sm rounded bg-primary text-textLightPrimary z-10 flex flex-col justify-center p-10 text-center gap-4">
 
                 <Dialog.Title className="text-lg font-semibold"> Estas a punto de eliminar: <b>{product.name}</b></Dialog.Title>
                 <div className='text-textWarning p-4 bg-textLightPrimary text-8xl rounded-full'>
@@ -88,11 +90,13 @@ const DeletePModal = ({isOpen, setOpen, product}: Props) => {
 
 const deleteProduct = async(id?: string | ObjectId) =>{
   
+     
     const request = await fetch(`/api/products/${id}`,{method: 'DELETE'})
   
     const result = request.json()
 
     return result 
 }
+
 
 export default DeletePModal

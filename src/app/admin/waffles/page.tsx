@@ -1,20 +1,16 @@
-import AuthModal from '@/components/admin/auth/AuthModal'
 import ProductCard from '@/components/admin/products/ProductCard'
 import ProductGrid from '@/components/admin/products/ProductGrid'
 import SectionTitle from '@/components/products/SectionTitle'
-import { getProducts } from '@/lib/mongo/products'
+import { getProductsByCategory } from '@/lib/mongo/products'
+import React from 'react'
 
-export const revalidate = 0
+const page = async () => {
 
-const AdminPage = async () => {
-
-  const { products } = await getProducts()
+  const { products } = await getProductsByCategory("Waffle")
 
   return (
     <div>
-      <AuthModal
-      />
-      <SectionTitle title='PRODUCTOS' />
+      <SectionTitle title='WAFFLES' />
       <ProductGrid>
         {products?.map(product => <ProductCard key={product._id?.toString()} product={{ ...product, _id: product._id?.toString() }} />)}
       </ProductGrid>
@@ -22,5 +18,4 @@ const AdminPage = async () => {
   )
 }
 
-
-export default AdminPage
+export default page

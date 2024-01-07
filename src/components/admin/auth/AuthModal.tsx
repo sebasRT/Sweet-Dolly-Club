@@ -33,7 +33,7 @@ const AuthModal = () => {
     <Dialog open={!authorized} onClose={()=>handleAuth()} >
             <div className="fixed inset-0 bg-black/30 z-0" aria-hidden="true" />
             <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-        <Dialog.Panel className="mx-auto max-w-sm rounded bg-productModalBG text-textLightPrimary flex flex-col justify-center p-10 text-center gap-4">
+        <Dialog.Panel className="mx-auto max-w-sm rounded bg-primary text-textLightPrimary flex flex-col justify-center p-10 text-center gap-4">
 
 
             <b>Ingresa la clave de acceso </b>

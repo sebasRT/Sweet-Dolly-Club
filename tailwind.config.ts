@@ -14,10 +14,8 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors:{
-        'productCardBG' : 'rgba(0, 61, 153, 0.2)',
-        'productModalBG': '#3399ff',
-        'primary': "#0ea5e9",
-        'secondary': "#6366f1",
+        'primary': "#4d4dff",
+        'secondary': "#3399ff",
         'textDarkPrimary': '#000099',
         'textLightPrimary' : '#e6e6ff',
         'textLightSecondary' : '#c2c2f0',

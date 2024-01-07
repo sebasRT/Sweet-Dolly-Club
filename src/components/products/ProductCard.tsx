@@ -13,7 +13,7 @@ const ProductCard = ({product}: Props) => {
     let ingredients = product.ingredients.join(", ")
 
   return (
-    <div className="flex justify-between bg-productCardBG text-textLightPrimary p-4">
+    <div className="flex justify-between bg-primary/50 text-textLightPrimary p-4" onClick={()=>setOpenModal(true)}>
         <div>
         <b className="text-xl uppercase">{product.name}</b>
         <p>{product.description}</p>
@@ -21,7 +21,7 @@ const ProductCard = ({product}: Props) => {
         <p>{ingredients}</p>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-around">
 
         <b>$ {product.price}</b>
         <button onClick={()=>setOpenModal(true)} className="text-textLightSecondary rounded-sm px-1 bg-white/10">VER</button>

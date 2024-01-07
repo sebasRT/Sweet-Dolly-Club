@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   error: boolean;
@@ -13,7 +13,7 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
       <div>
         <div className="flex flex-col items-start">
         <label className="m-1 font-bold">{label}</label>
-        <input type={type} ref={ref} {...inputProps} className="text-textDarkPrimary px-2 font-extrabold uppercase w-full focus-visible:border-b-4 focus-visible:border-secondary"/>
+        <input type={type} ref={ref} {...inputProps} className="text-textDarkPrimary px-2 font-extrabold uppercase w-full focus-visible:border-b-4 focus-visible:border-secondary" autoComplete="off"/>
         </div>
         {error && <span className="text-textWarning text-xs font-semibold">{helperText}</span> }
       </div>
