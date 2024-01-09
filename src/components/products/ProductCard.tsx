@@ -10,15 +10,21 @@ type Props = {
 
 const ProductCard = ({product}: Props) => {
     const [openModal, setOpenModal] = useState(false)
-    let ingredients = product.ingredients.join(", ")
+    let ingredients = product.ingredients?.join(", ")
 
   return (
-    <div className="flex justify-between bg-primary/50 text-textLightPrimary p-4" onClick={()=>setOpenModal(true)}>
+    <div className="flex justify-between bg-primary/70 text-textLightPrimary p-4" onClick={()=>setOpenModal(true)}>
         <div>
+        <p className="text-xs">{product.category}</p>
         <b className="text-xl uppercase">{product.name}</b>
         <p>{product.description}</p>
+        {
+          ingredients && 
+          <>
         <b className="text-xs">INGREDIENTES</b>
         <p>{ingredients}</p>
+          </>
+        }
         </div>
 
         <div className="flex flex-col justify-around">

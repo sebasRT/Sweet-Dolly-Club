@@ -1,6 +1,5 @@
 import { Product } from '@/model/Product'
 import { Dialog } from '@headlessui/react'
-import { CldImage } from 'next-cloudinary'
 import React, { Dispatch, SetStateAction } from 'react'
 
 type Props = {
@@ -13,7 +12,7 @@ const ProductModal = ({isOpen, setOpen, product}: Props) => {
   const {name, description,
     //  imageID, 
      price, category, ingredients} = product
-  let productIngredients = ingredients.join(", ")
+  let productIngredients = ingredients?.join(", ")
   const productCategory = category.replace("Otra", "")
 
   return (
@@ -34,17 +33,20 @@ const ProductModal = ({isOpen, setOpen, product}: Props) => {
       text-center
       gap-4
       ">
-
-        <Dialog.Title className="font-bold text-xl uppercase ">{name} <span>{productCategory}</span> </Dialog.Title>
+        <p>{productCategory}</p>
+        <Dialog.Title className="font-bold text-xl uppercase ">{name}  </Dialog.Title>
         <Dialog.Description>
           {description}
         </Dialog.Description>
         {/* <CldImage src={imageID} width={500} height={500} alt="product's image" className='h-25 w-full' /> */}
 
+{
+  productIngredients && 
         <div>
             <b>INGREDIENTES</b>
             <p>{productIngredients}</p>
         </div>
+}
           <b className='text-lg'>$ {price}</b>
           <button onClick={() => setOpen(false)} className='font-semibold bg-black/30'>OK</button>
       </Dialog.Panel>

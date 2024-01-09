@@ -27,7 +27,7 @@ const schema: yup.ObjectSchema<Product>= yup.object({
   // imageID: yup.string().required("Por favor añade una imagen"),
   category: yup.string().oneOf(["Waffle", "Frosty", "Malteada", "Malteada natural", "Frappé", "Bebida fría", "Bebida caliente", "Otra"],"Selecciona alguna categoría").required(),
   price: yup.number().typeError("Por favor añade un precio al producto").required("Por favor añade un precio al producto"),
-  ingredients: yup.array().of(yup.string().required()).required("Procura no dejar el producto sin ingredientes").length(1, "Procura no dejar el producto sin ingredientes"),
+  ingredients: yup.array().of(yup.string()),
 }) ;
 
 

@@ -24,7 +24,7 @@ const ProductGrid = async({children}: Props) => {
 
       </div>
        : 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-4 text-left">
         {children}
       </div>
 

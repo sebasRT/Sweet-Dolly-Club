@@ -3,6 +3,6 @@ export type Product =  {
     description: string;
     // imageID: string;
     category: "Waffle" | "Frosty" | "Malteada" | "Malteada natural" | "Frappé" | "Bebida fría" | "Bebida caliente" | "Otra" | ""
-    ingredients: string[]
+    ingredients?: (string | undefined)[]
     price: number
 }
