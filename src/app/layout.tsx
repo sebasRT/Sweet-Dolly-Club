@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sweet-Dolly Club',
     description: 'Disfruta sin remordimientos',
-    url: 'https://sweet-dollyclub.vercel.app',
+    url: 'https://sweet-dolly-club.vercel.app',
     siteName: 'Sweet-Dolly Club',
     images: [
       {
