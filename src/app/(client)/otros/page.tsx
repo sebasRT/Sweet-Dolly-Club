@@ -4,6 +4,8 @@ import ProductGrid from '@/components/products/ProductGrid'
 import { getProductsByCategory } from '@/lib/mongo/products'
 import React from 'react'
 
+export const revalidate = 0
+
 const page = async () => {
 
   const { products } = await getProductsByCategory("Otra")

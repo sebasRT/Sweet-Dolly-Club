@@ -4,6 +4,8 @@ import SectionTitle from '@/components/products/SectionTitle'
 import { getProductsByCategory } from '@/lib/mongo/products'
 import React from 'react'
 
+export const revalidate = 0
+
 const page = async () => {
 
   const naturalShake = await getProductsByCategory("Malteada natural")

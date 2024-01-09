@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://sweet-dolly-club.vercel.app'),
   title: 'Sweet-Dolly Club',
   description: 'Disfruta sin remordimientos',
   openGraph: {
