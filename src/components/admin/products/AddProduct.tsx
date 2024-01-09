@@ -7,7 +7,7 @@ import { Product } from './modals/utils/model';
 const InitialProduct: Product = {
   name: "",
   description: "",
-  imageID: "",
+  // imageID: "",
   category: "",
   price: 0,
   ingredients: [""]

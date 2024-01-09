@@ -10,7 +10,9 @@ type Props = {
 }
 
 const ProductModal = ({isOpen, setOpen, product}: Props) => {
-  const {name, description, imageID, price, category, ingredients} = product
+  const {name, description,
+    //  imageID, 
+     price, category, ingredients} = product
   let productIngredients = ingredients.join(", ")
   const productCategory = category.replace("Otra", "")
 
@@ -37,7 +39,7 @@ const ProductModal = ({isOpen, setOpen, product}: Props) => {
         <Dialog.Description>
           {description}
         </Dialog.Description>
-        <CldImage src={imageID} width={500} height={500} alt="product's image" className='h-25 w-full' />
+        {/* <CldImage src={imageID} width={500} height={500} alt="product's image" className='h-25 w-full' /> */}
 
         <div>
             <b>INGREDIENTES</b>

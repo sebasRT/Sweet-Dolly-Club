@@ -13,7 +13,9 @@ body{
     background-color: #062149;
     background-image: url("/public/background.jpeg");
     background-position: center;
+    background-attachment: fixed; 
     color: #e6e6ff ;
+    overflow-x: hidden;
 }
 input:focus-visible{
     outline: none;

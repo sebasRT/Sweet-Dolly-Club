@@ -5,7 +5,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import ActionPanel from './ActionPanel';
 import { RiErrorWarningFill } from "react-icons/ri";
 import { useRouter } from 'next/navigation';
-import deleteImage from './deleteImage';
+// import deleteImage from './deleteImage';
 
 type Props = {
     isOpen: boolean;
@@ -24,7 +24,7 @@ const DeletePModal = ({isOpen, setOpen, product}: Props) => {
 
         setModalState("loading")
         const result = await deleteProduct(id)
-        deleteImage(product.imageID)
+        // deleteImage(product.imageID)
 
         if(result.error){
             setModalState("db error")

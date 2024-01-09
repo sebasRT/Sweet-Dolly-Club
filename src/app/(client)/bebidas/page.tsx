@@ -3,6 +3,7 @@ import ProductCard from '@/components/products/ProductCard'
 import ProductGrid from '@/components/products/ProductGrid'
 import { getProductsByCategory } from '@/lib/mongo/products'
 import React from 'react'
+import Background from './background'
 
 const page = async () => {
 
@@ -10,6 +11,9 @@ const page = async () => {
   const coolDrinks = await getProductsByCategory("Bebida fría")
 
   return (
+    <>
+    <Background/>
+    <div>
     <div>
       <SectionTitle title='BEBIDAS CALIENTES' />
       <ProductGrid>
@@ -20,6 +24,8 @@ const page = async () => {
         {coolDrinks.products?.map(product => <ProductCard key={product._id?.toString()} product={{ ...product, _id: product._id?.toString() }} />)}
       </ProductGrid>
     </div>
+    </div>
+    </>
   )
 }
 

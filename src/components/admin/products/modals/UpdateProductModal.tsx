@@ -9,7 +9,7 @@ import Textarea from '../inputs/Textarea';
 import { useRouter } from 'next/navigation';
 import ActionPanel from './ActionPanel';
 import { ObjectId } from 'mongodb';
-import ImageInput from '../inputs/ImageInput';
+// import ImageInput from '../inputs/ImageInput';
 import { Product as SavedProduct } from '@/model/Product';
 import { Product } from './utils/model';
 import deleteImage from './deleteImage';
@@ -24,7 +24,7 @@ type Props = {
 const schema: yup.ObjectSchema<Product>= yup.object({
   name: yup.string().required("El nombre es obligatorio"),
   description: yup.string().required("Muestra a tus clientes una descripción"),
-  imageID: yup.string().required("Por favor añade una imagen"),
+  // imageID: yup.string().required("Por favor añade una imagen"),
   category: yup.string().oneOf(["Waffle", "Frosty", "Malteada", "Malteada natural", "Frappé", "Bebida fría", "Bebida caliente", "Otra"]).required("Selecciona una categoría"),
   price: yup.number().typeError("Por favor añade un precio al producto").required("Por favor añade un precio al producto"),
   ingredients: yup.array().of(yup.string().required()).required("Procura no dejar el producto sin ingredientes"),
@@ -52,7 +52,7 @@ const UpdatePModal = ({ isOpen, setOpen, product }: Props) => {
     const productToSubmit: Product = {
       name: getValues().name,
       description: getValues().description,
-      imageID: getValues().imageID,
+    // imageID: getValues().imageID,
       category: getValues().category,
       price: getValues().price,
       ingredients: getValues().ingredients
@@ -113,14 +113,16 @@ const UpdatePModal = ({ isOpen, setOpen, product }: Props) => {
 
                         <FormProvider {...form}>
                       <div className='flex flex-col justify-center text-center gap-3'>
-                        <label className="m-1 font-bold">IMAGEN</label>
-                          <ImageInput/>
+                        {/* <label className="m-1 font-bold">IMAGEN</label>
+                          <ImageInput/> */}
                             <ArrayInput/>
                            
                       </div>
                         </FormProvider>
             
-                      <button onClick={() => {deleteImage(getValues().imageID);setOpen(false); reset();}} className="font-semibold mt-4 bg-black/10">
+                      <button onClick={() => {
+                        // deleteImage(getValues().imageID);
+                        setOpen(false); reset();}} className="font-semibold mt-4 bg-black/10">
                         Descartar
                       </button> 
                       <button type="submit" onClick={handleSubmit(onSubmit)} className="font-semibold bg-black/30 mt-4">
